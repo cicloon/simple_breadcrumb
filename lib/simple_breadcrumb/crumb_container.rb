@@ -9,7 +9,7 @@ module SimpleBreadcrumb
 
 
 		def add_crumb(crumb_text)
-			@crumbs << crumb_text
+			@crumbs << SimpleBreadcrumb::Crumb.new(crumb_text)
 		end
 
 		def each(&block)
