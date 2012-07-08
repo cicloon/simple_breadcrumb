@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Cicloon"]
   s.email       = ["aleon.prof@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{This gem aims to create breadcrumbs with a death simple DSL}
+  s.description = %q{Tired of creating breadcrumbs on each project I worked, I decided to create this gem}
 
   s.rubyforge_project = "simple_breadcrumb"
 
@@ -21,4 +21,8 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
   # s.add_runtime_dependency "rest-client"
+
+  s.add_development_dependency "rspec", "~> 2.11.0"
+
+
 end
