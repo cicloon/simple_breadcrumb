@@ -53,6 +53,18 @@ describe SimpleBreadcrumb::CrumbContainer do
 			@cc.first.class.name.should eql("SimpleBreadcrumb::Crumb")
 		end
 
+		it "should add crumbs with url" do
+		  @cc.add_crumb("hola", "/home")
+		  @cc.first.url.should eql("/home")
+		end
+
+		it "should add crumbs with html options" do
+			@cc.add_crumb("hola", "/home", :html_options => {:class => 'test'})
+			@cc.first.url.should eql("/home")
+			@cc.first.tag_html_options.should eql({:class => 'test'})
+		end
+
+
 	end
 
 end
@@ -145,9 +157,33 @@ describe SimpleBreadcrumb::Formatter do
 		  html = @formatter.render(@crumb)		  
 
 			html.should eql("<div class=\"wrapper_class\" id=\"wrapper_id\"><span class=\"tag_class\" id=\"tag_id\"><a href=\"#{@crumb.url}\" class=\"anchor_class\" id=\"anchor_id\">#{@crumb.content}</a></span></div>")
+		end
+
+	end
+
+	context "when rendering a container" do
+
+		before(:each) do
+			@cc = SimpleBreadcrumb::CrumbContainer.new
+		  @formatter = SimpleBreadcrumb::Formatter.new
+
+		  @container_tag = SimpleBreadcrumb.container_tag.to_s
+		  @cw_tag_start 	= SimpleBreadcrumb.container_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb.container_wrapper_tag.to_s}>"
+		  @cw_tag_end		= SimpleBreadcrumb.container_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb.container_wrapper_tag.to_s}>"
+		  
+		  @crumb_tag = SimpleBreadcrumb.crumb_tag.to_s
+		  @wrapper_tag_start 	= SimpleBreadcrumb.crumb_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb.crumb_wrapper_tag.to_s}>"
+		  @wrapper_tag_end		= SimpleBreadcrumb.crumb_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb.crumb_wrapper_tag.to_s}>"
 
 		end
 
+		it "should render an empty container" do
+		  html = @formatter.render(@cc)
+		  html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb.container_html_options[:class]}\"></#{@container_tag}>#{@cc_tag_end}")
+		end
+
+
+	  
 	end
 
 	

@@ -9,7 +9,14 @@ module SimpleBreadcrumb
 		end
 
 		def render(obj)
-			inner_content	= obj.url.blank?? obj.content : @context.link_to(obj.content, obj.url, obj.anchor_html_options)
+			
+			if obj.is_a? Crumb
+				inner_content = (obj.url.blank?? obj.content : @context.link_to(obj.content, obj.url, obj.anchor_html_options))
+			elsif obj.is_a? CrumbContainer
+				objects = []
+				obj.each{|content_obj| objects << render(content_obj) }				
+				inner_content = objects.join('')
+			end
 			
 			outter_content =	@context.content_tag obj.html_tag, inner_content, obj.tag_html_options
 

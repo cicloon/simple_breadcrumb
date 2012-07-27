@@ -16,8 +16,8 @@ module SimpleBreadcrumb
 			@crumbs = []
 		end
 
-		def add_crumb(crumb_text)
-			@crumbs << SimpleBreadcrumb::Crumb.new(crumb_text)
+		def add_crumb(crumb_text, url = nil, options = {})
+			@crumbs << SimpleBreadcrumb::Crumb.new(crumb_text, url, options)
 		end
 
 		def each(&block)

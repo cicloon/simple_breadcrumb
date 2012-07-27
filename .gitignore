@@ -2,3 +2,5 @@
 .bundle
 Gemfile.lock
 pkg/*
+simple_breadcrumb.sublime-project
+simple_breadcrumb.sublime-workspace
