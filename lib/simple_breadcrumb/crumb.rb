@@ -8,9 +8,11 @@ module SimpleBreadcrumb
 			@html_tag = options[:html_tag] || SimpleBreadcrumb.crumb_tag
 			@html_wrapper_tag = options[:html_wrapper_tag] || SimpleBreadcrumb.crumb_wrapper_tag
 
-			@tag_html_options = options[:html_options]
-			@wrapper_html_options = options[:wrapper_html_options]
-			@anchor_html_options = options[:anchor_html_options]
+			options = {:anchor_html_options => {}, :html_options => {}, :wrapper_html_options => {}}.merge options
+
+			@tag_html_options 		= SimpleBreadcrumb.crumb_tag_html_options.merge options[:html_options]
+			@wrapper_html_options = SimpleBreadcrumb.crumb_wrapper_tag_html_options.merge options[:wrapper_html_options]
+			@anchor_html_options 	= SimpleBreadcrumb.anchor_html_options.merge options[:anchor_html_options]
 
 			@content = content
 			@url = url
