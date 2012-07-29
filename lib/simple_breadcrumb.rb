@@ -6,6 +6,8 @@ require "simple_breadcrumb/version"
 
 module SimpleBreadcrumb
 
-
+	def self.setup
+		yield self
+	end
 
 end
