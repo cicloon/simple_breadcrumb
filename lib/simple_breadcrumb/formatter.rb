@@ -19,7 +19,7 @@ module SimpleBreadcrumb
         last_index = obj.size - 1
 
         obj.each_with_index do |content_obj, index|
-          opts = {:anchor_html_options => {:class => SimpleBreadcrumb.last_class}} if (index == last_index && !SimpleBreadcrumb.last_class.blank?)
+          opts = {:anchor_html_options => {:class => SimpleBreadcrumb::Config.last_class}} if (index == last_index && !SimpleBreadcrumb::Config.last_class.blank?)
           opts ||= {}
           objects << render(content_obj, opts)
         end
@@ -37,7 +37,7 @@ module SimpleBreadcrumb
 
     def merge_options(options, obj)
     	options = {:anchor_html_options => {}, :tag_html_options => {}, :wrapper_html_options => {}}.merge options
-    	    	
+
       options[:anchor_html_options] 	= options[:anchor_html_options].merge obj.anchor_html_options if obj.respond_to?(:anchor_html_options) && !obj.anchor_html_options.blank?
       options[:tag_html_options] 			= options[:tag_html_options].merge obj.tag_html_options
       options[:wrapper_html_options] 	= options[:wrapper_html_options].merge obj.wrapper_html_options

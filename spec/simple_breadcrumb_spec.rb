@@ -6,11 +6,11 @@ describe SimpleBreadcrumb::CrumbContainer do
 
     it "should take default options" do
       cc = SimpleBreadcrumb::CrumbContainer.new
-      cc.html_tag.should eql(SimpleBreadcrumb.container_tag)
-      cc.html_wrapper_tag.should eql(SimpleBreadcrumb.container_wrapper_tag)
+      cc.html_tag.should eql(SimpleBreadcrumb::Config.container_tag)
+      cc.html_wrapper_tag.should eql(SimpleBreadcrumb::Config.container_wrapper_tag)
 
-      cc.tag_html_options.should eql(SimpleBreadcrumb.container_html_options)
-      cc.wrapper_html_options.should eql(SimpleBreadcrumb.container_wrapper_html_options)
+      cc.tag_html_options.should eql(SimpleBreadcrumb::Config.container_html_options)
+      cc.wrapper_html_options.should eql(SimpleBreadcrumb::Config.container_wrapper_html_options)
     end
 
     it "should accept new options" do
@@ -85,8 +85,8 @@ describe SimpleBreadcrumb::Crumb do
 
     it "should take default options" do
       first_crumb = SimpleBreadcrumb::Crumb.new("hola")
-      first_crumb.html_tag.should eql(SimpleBreadcrumb.crumb_tag)
-      first_crumb.html_wrapper_tag.should eql(SimpleBreadcrumb.crumb_wrapper_tag)
+      first_crumb.html_tag.should eql(SimpleBreadcrumb::Config.crumb_tag)
+      first_crumb.html_wrapper_tag.should eql(SimpleBreadcrumb::Config.crumb_wrapper_tag)
     end
 
     it "should take html options" do
@@ -126,10 +126,10 @@ describe SimpleBreadcrumb::Formatter do
       @formatter = SimpleBreadcrumb::Formatter.new
       @crumb = SimpleBreadcrumb::Crumb.new('test')
 
-      @tag = SimpleBreadcrumb.crumb_tag.to_s
+      @tag = SimpleBreadcrumb::Config.crumb_tag.to_s
 
-      @wrapper_tag_start 	= SimpleBreadcrumb.crumb_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb.crumb_wrapper_tag.to_s}>"
-      @wrapper_tag_end		= SimpleBreadcrumb.crumb_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb.crumb_wrapper_tag.to_s}>"
+      @wrapper_tag_start 	= SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
+      @wrapper_tag_end		= SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
 
     end
 
@@ -166,40 +166,48 @@ describe SimpleBreadcrumb::Formatter do
       @cc = SimpleBreadcrumb::CrumbContainer.new
       @formatter = SimpleBreadcrumb::Formatter.new
 
-      @container_tag = SimpleBreadcrumb.container_tag.to_s
-      @cw_tag_start 	= SimpleBreadcrumb.container_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb.container_wrapper_tag.to_s}>"
-      @cw_tag_end		= SimpleBreadcrumb.container_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb.container_wrapper_tag.to_s}>"
+      @container_tag = SimpleBreadcrumb::Config.container_tag.to_s
+      @cw_tag_start 	= SimpleBreadcrumb::Config.container_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb::Config.container_wrapper_tag.to_s}>"
+      @cw_tag_end		= SimpleBreadcrumb::Config.container_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb::Config.container_wrapper_tag.to_s}>"
 
-      @crumb_tag = SimpleBreadcrumb.crumb_tag.to_s
-      @wrapper_tag_start 	= SimpleBreadcrumb.crumb_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb.crumb_wrapper_tag.to_s}>"
-      @wrapper_tag_end		= SimpleBreadcrumb.crumb_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb.crumb_wrapper_tag.to_s}>"
+      @crumb_tag = SimpleBreadcrumb::Config.crumb_tag.to_s
+      @wrapper_tag_start 	= SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
+      @wrapper_tag_end		= SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
     end
 
     it "should render an empty container" do
       html = @formatter.render(@cc)
-      html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb.container_html_options[:class]}\"></#{@container_tag}>#{@cc_tag_end}")
+      html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb::Config.container_html_options[:class]}\"></#{@container_tag}>#{@cc_tag_end}")
     end
 
     it "should render container with one crumb with last link disabled" do
       @cc.add_crumb('first_last')
       html = @formatter.render(@cc)
-      html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb.container_html_options[:class]}\">#{@wrapper_tag_start}<#{@crumb_tag}>#{@cc.first.content}</#{@crumb_tag}>#{@wrapper_tag_end}</#{@container_tag}>#{@cc_tag_end}")
+      html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb::Config.container_html_options[:class]}\">#{@wrapper_tag_start}<#{@crumb_tag}>#{@cc.first.content}</#{@crumb_tag}>#{@wrapper_tag_end}</#{@container_tag}>#{@cc_tag_end}")
     end
 
     it "should render container with one crumb with last link enabled" do
       @cc.add_crumb('first_last', '/home')
       html = @formatter.render(@cc)
-      html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb.container_html_options[:class]}\">#{@wrapper_tag_start}<#{@crumb_tag}><a href=\"#{@cc.first.url}\" class=\"#{SimpleBreadcrumb.last_class}\">#{@cc.first.content}</a></#{@crumb_tag}>#{@wrapper_tag_end}</#{@container_tag}>#{@cc_tag_end}")
+      html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb::Config.container_html_options[:class]}\">#{@wrapper_tag_start}<#{@crumb_tag}><a href=\"#{@cc.first.url}\" class=\"#{SimpleBreadcrumb::Config.last_class}\">#{@cc.first.content}</a></#{@crumb_tag}>#{@wrapper_tag_end}</#{@container_tag}>#{@cc_tag_end}")
     end
 
     it "should render container with one crumb with last class disabled" do
-      before_last_class = SimpleBreadcrumb.last_class
-      SimpleBreadcrumb.last_class = nil
+      before_last_class = SimpleBreadcrumb::Config.last_class
+      SimpleBreadcrumb::Config.last_class = nil
       @cc.add_crumb('first_last', '/home')
       html = @formatter.render(@cc)
-      html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb.container_html_options[:class]}\">#{@wrapper_tag_start}<#{@crumb_tag}><a href=\"#{@cc.first.url}\">#{@cc.first.content}</a></#{@crumb_tag}>#{@wrapper_tag_end}</#{@container_tag}>#{@cc_tag_end}")
-      SimpleBreadcrumb.last_class = before_last_class
+      html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb::Config.container_html_options[:class]}\">#{@wrapper_tag_start}<#{@crumb_tag}><a href=\"#{@cc.first.url}\">#{@cc.first.content}</a></#{@crumb_tag}>#{@wrapper_tag_end}</#{@container_tag}>#{@cc_tag_end}")
+      SimpleBreadcrumb::Config.last_class = before_last_class
     end
+
+    it "should render container with two crumbs" do
+      @cc.add_crumb('first', '/home')
+      @cc.add_crumb('second', '/second_page')
+      html = @formatter.render(@cc)
+      html.should eql("#{@cc_tag_start}<#{@container_tag} class=\"#{SimpleBreadcrumb::Config.container_html_options[:class]}\">#{@wrapper_tag_start}<#{@crumb_tag}><a href=\"#{@cc.first.url}\">#{@cc.first.content}</a></#{@crumb_tag}><#{@crumb_tag}><a href=\"#{@cc.last.url}\" class=\"#{SimpleBreadcrumb::Config.last_class}\">#{@cc.last.content}</a></#{@crumb_tag}>#{@wrapper_tag_end}</#{@container_tag}>#{@cc_tag_end}")
+    end
+
 
   end
 

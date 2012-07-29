@@ -5,14 +5,14 @@ module SimpleBreadcrumb
 
 		def initialize(content, url = nil, options = {})
 
-			@html_tag = options[:html_tag] || SimpleBreadcrumb.crumb_tag
-			@html_wrapper_tag = options[:html_wrapper_tag] || SimpleBreadcrumb.crumb_wrapper_tag
+			@html_tag = options[:html_tag] || SimpleBreadcrumb::Config.crumb_tag
+			@html_wrapper_tag = options[:html_wrapper_tag] || SimpleBreadcrumb::Config.crumb_wrapper_tag
 
 			options = {:anchor_html_options => {}, :html_options => {}, :wrapper_html_options => {}}.merge options
 
-			@tag_html_options 		= SimpleBreadcrumb.crumb_tag_html_options.merge options[:html_options]
-			@wrapper_html_options = SimpleBreadcrumb.crumb_wrapper_tag_html_options.merge options[:wrapper_html_options]
-			@anchor_html_options 	= SimpleBreadcrumb.anchor_html_options.merge options[:anchor_html_options]
+			@tag_html_options 		= SimpleBreadcrumb::Config.crumb_tag_html_options.merge options[:html_options]
+			@wrapper_html_options = SimpleBreadcrumb::Config.crumb_wrapper_tag_html_options.merge options[:wrapper_html_options]
+			@anchor_html_options 	= SimpleBreadcrumb::Config.anchor_html_options.merge options[:anchor_html_options]
 
 			@content = content
 			@url = url
