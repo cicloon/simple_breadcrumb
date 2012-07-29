@@ -110,15 +110,6 @@ end
 
 describe SimpleBreadcrumb::Formatter do
 
-  context "on initialize" do
-
-    it "should set the view context" do
-      formatter = SimpleBreadcrumb::Formatter.new
-      f_context = formatter.instance_variable_get(:@context)
-      f_context.class.name.should eql('ActionView::Base')
-    end
-
-  end
 
   context "when rendering a crumb" do
 

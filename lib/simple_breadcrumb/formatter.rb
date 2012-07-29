@@ -4,16 +4,16 @@ module SimpleBreadcrumb
 
   class Formatter
 
-    def initialize
-      @context = ActionView::Base.new
-    end
+  	include ActionView::Helpers::TagHelper
+  	include ActionView::Helpers::UrlHelper
+
 
     def render(obj, options = {})
 
       options = merge_options(options, obj)
 
       if obj.is_a? Crumb
-        inner_content = (obj.url.blank?? obj.content : @context.link_to(obj.content, obj.url, options[:anchor_html_options] ))
+        inner_content = (obj.url.blank?? obj.content : link_to(obj.content, obj.url, options[:anchor_html_options] ))
       elsif obj.is_a? CrumbContainer
         objects = []
         last_index = obj.size - 1
@@ -27,9 +27,9 @@ module SimpleBreadcrumb
         inner_content = objects.join('').html_safe
       end
 
-      outter_content =	@context.content_tag(obj.html_tag, inner_content, options[:tag_html_options])
+      outter_content =	content_tag(obj.html_tag, inner_content, options[:tag_html_options])
 
-      obj.html_wrapper_tag.blank?? outter_content : @context.content_tag(obj.html_wrapper_tag, outter_content, options[:wrapper_html_options])
+      obj.html_wrapper_tag.blank?? outter_content : content_tag(obj.html_wrapper_tag, outter_content, options[:wrapper_html_options])
 
     end
 
