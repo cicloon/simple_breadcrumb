@@ -1,4 +1,4 @@
-require 'formtastic/engine' if defined?(::Rails)
+require "simple_breadcrumb/engine" if defined?(::Rails)
 require "simple_breadcrumb/version"
 
 require "active_support"
