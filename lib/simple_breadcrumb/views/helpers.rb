@@ -1,25 +1,23 @@
 module SimpleBreadcrumb
-	module Controllers
+	module Views
 		module Helpers
 			extend ActiveSupport::Concern
 
 			included do
-				initialize_formatter
-				helper_method :render_breadcrumbs
+				SimpleBreadcrumb.formatter = SimpleBreadcrumb::Formatter.new				
 			end
 
 			def render_breadcrumbs(options = {})
-				SimpleBreadcrumb.formatter.render(SimpleBreadcrumb.container)
+				SimpleBreadcrumb.formatter.render(@container)
 			end
+
+			def initialize_formatter
+				SimpleBreadcrumb.formatter = SimpleBreadcrumb::Formatter.new								
+			end			
 
 			private
 
-			def initialize_formatter
-				SimpleBreadcrumb.formatter = SimpleBreadcrumb::Formatter.new
 
-				
-				
-			end			
 
 
 		end

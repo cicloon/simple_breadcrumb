@@ -26,7 +26,7 @@ module SimpleBreadcrumb
 	mattr_accessor :container
 
 	def self.setup
-		yield self
+		yield Config
 	end
 
 end
