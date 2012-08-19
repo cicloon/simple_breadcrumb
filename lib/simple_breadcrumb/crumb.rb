@@ -16,6 +16,7 @@ module SimpleBreadcrumb
 
 			@content = content
 			@url = url
+			
 		end
 
 

@@ -110,7 +110,6 @@ end
 
 describe SimpleBreadcrumb::Formatter do
 
-
   context "when rendering a crumb" do
 
     before(:each) do
