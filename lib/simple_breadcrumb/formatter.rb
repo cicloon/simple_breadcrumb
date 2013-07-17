@@ -4,8 +4,8 @@ module SimpleBreadcrumb
 
   class Formatter
 
-  	include ActionView::Helpers::TagHelper
-  	include ActionView::Helpers::UrlHelper
+    include ActionView::Helpers::TagHelper
+    include ActionView::Helpers::UrlHelper
 
 
     def render(obj, options = {})
@@ -27,7 +27,7 @@ module SimpleBreadcrumb
         inner_content = objects.join('').html_safe
       end
 
-      outter_content =	content_tag(obj.html_tag, inner_content, options[:tag_html_options])
+      outter_content =  content_tag(obj.html_tag, inner_content, options[:tag_html_options])
 
       obj.html_wrapper_tag.blank?? outter_content : content_tag(obj.html_wrapper_tag, outter_content, options[:wrapper_html_options])
 
@@ -37,10 +37,10 @@ module SimpleBreadcrumb
 
     def merge_options(options, obj)
 
-    	options = {:anchor_html_options => {}, :tag_html_options => {}, :wrapper_html_options => {}}.merge options
-      options[:anchor_html_options] 	= options[:anchor_html_options].merge obj.anchor_html_options if obj.respond_to?(:anchor_html_options) && !obj.anchor_html_options.blank?
-      options[:tag_html_options] 			= options[:tag_html_options].merge obj.tag_html_options
-      options[:wrapper_html_options] 	= options[:wrapper_html_options].merge obj.wrapper_html_options
+      options = {:anchor_html_options => {}, :tag_html_options => {}, :wrapper_html_options => {}}.merge options
+      options[:anchor_html_options]   = options[:anchor_html_options].merge obj.anchor_html_options if obj.respond_to?(:anchor_html_options) && !obj.anchor_html_options.blank?
+      options[:tag_html_options]      = options[:tag_html_options].merge obj.tag_html_options
+      options[:wrapper_html_options]  = options[:wrapper_html_options].merge obj.wrapper_html_options
       options
 
     end

@@ -12,7 +12,7 @@ module SimpleBreadcrumb
 
       options = {:html_options => {}, :wrapper_html_options => {}}.merge options
 
-      @tag_html_options 		= SimpleBreadcrumb::Config.container_html_options.merge options[:html_options]
+      @tag_html_options     = SimpleBreadcrumb::Config.container_html_options.merge options[:html_options]
       @wrapper_html_options = SimpleBreadcrumb::Config.container_wrapper_html_options.merge options[:wrapper_html_options]
 
       @crumbs = []

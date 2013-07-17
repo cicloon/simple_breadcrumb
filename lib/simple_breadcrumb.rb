@@ -6,27 +6,27 @@ require "active_support/dependencies"
 
 module SimpleBreadcrumb 
 
-	extend ActiveSupport::Autoload
+  extend ActiveSupport::Autoload
 
-	autoload :Formatter
-	autoload :CrumbContainer
-	autoload :Crumb
-	autoload :Config
+  autoload :Formatter
+  autoload :CrumbContainer
+  autoload :Crumb
+  autoload :Config
 
 
-	module Controllers
-		autoload :Helpers, 'simple_breadcrumb/controllers/helpers'
-	end
+  module Controllers
+    autoload :Helpers, 'simple_breadcrumb/controllers/helpers'
+  end
 
-	module Views
-		autoload :Helpers, 'simple_breadcrumb/views/helpers'
-	end
+  module Views
+    autoload :Helpers, 'simple_breadcrumb/views/helpers'
+  end
 
-	mattr_accessor :formatter
-	mattr_accessor :container
+  mattr_accessor :formatter
+  mattr_accessor :container
 
-	def self.setup
-		yield Config
-	end
+  def self.setup
+    yield Config
+  end
 
 end

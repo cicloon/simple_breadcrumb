@@ -118,8 +118,8 @@ describe SimpleBreadcrumb::Formatter do
 
       @tag = SimpleBreadcrumb::Config.crumb_tag.to_s
 
-      @wrapper_tag_start 	= SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
-      @wrapper_tag_end		= SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
+      @wrapper_tag_start  = SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
+      @wrapper_tag_end    = SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
 
     end
 
@@ -135,13 +135,13 @@ describe SimpleBreadcrumb::Formatter do
     end
 
     it "should render a crumb with url and html options" do
-      @crumb.html_tag 				= :span
+      @crumb.html_tag         = :span
       @crumb.html_wrapper_tag = :div
       @crumb.url = '/home'
 
-      @crumb.tag_html_options 		= {:class => 'tag_class', :id => 'tag_id'}
+      @crumb.tag_html_options     = {:class => 'tag_class', :id => 'tag_id'}
       @crumb.wrapper_html_options = {:class => 'wrapper_class', :id => 'wrapper_id'}
-      @crumb.anchor_html_options 	= {:class => 'anchor_class', :id => 'anchor_id'}
+      @crumb.anchor_html_options  = {:class => 'anchor_class', :id => 'anchor_id'}
 
       html = @formatter.render(@crumb)
 
@@ -157,12 +157,12 @@ describe SimpleBreadcrumb::Formatter do
       @formatter = SimpleBreadcrumb::Formatter.new
 
       @container_tag = SimpleBreadcrumb::Config.container_tag.to_s
-      @cw_tag_start 	= SimpleBreadcrumb::Config.container_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb::Config.container_wrapper_tag.to_s}>"
-      @cw_tag_end		= SimpleBreadcrumb::Config.container_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb::Config.container_wrapper_tag.to_s}>"
+      @cw_tag_start   = SimpleBreadcrumb::Config.container_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb::Config.container_wrapper_tag.to_s}>"
+      @cw_tag_end   = SimpleBreadcrumb::Config.container_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb::Config.container_wrapper_tag.to_s}>"
 
       @crumb_tag = SimpleBreadcrumb::Config.crumb_tag.to_s
-      @wrapper_tag_start 	= SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
-      @wrapper_tag_end		= SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
+      @wrapper_tag_start  = SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "<#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
+      @wrapper_tag_end    = SimpleBreadcrumb::Config.crumb_wrapper_tag.blank? ? '' : "</#{SimpleBreadcrumb::Config.crumb_wrapper_tag.to_s}>"
     end
 
     it "should render an empty container" do
