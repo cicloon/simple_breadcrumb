@@ -23,10 +23,6 @@ module SimpleBreadcrumb
         @container ||= SimpleBreadcrumb::CrumbContainer.new       
       end
 
-
-
-
-
     end
   end
 end
